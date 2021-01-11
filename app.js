@@ -24,6 +24,7 @@ const generateResults = () => {
 }
 
 const displayResults = (results) => {
+    clearResults(resultsContainer.children);
     for(let result of results) {
         const showName = document.createElement("h2");
         showName.innerText = result.show.name;
@@ -32,5 +33,11 @@ const displayResults = (results) => {
         showContainer.appendChild(showName);
 
         resultsContainer.appendChild(showContainer);
+    }
+}
+
+const clearResults = (results) => {
+    while(results.length > 0) {
+        results[0].remove();
     }
 }
