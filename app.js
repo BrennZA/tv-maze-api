@@ -5,12 +5,19 @@ searchForm.addEventListener("submit", (event) => {
     generateResults();
 });
 
-const generateResults = async () => {
+const generateResults = () => {
     const results = searchForm.elements.searchInput.value;
-    try {
-        const res = await axios.get(`http://api.tvmaze.com/search/shows?q=${results}`);
-        console.log(res.data);
-    } catch (err) {
-        console.log(err);
-    }
+    const delay = Math.floor(Math.random() * 3000);
+    setTimeout(async() => {
+        if(delay < 2500) {
+            try {
+                const res = await axios.get(`http://api.tvmaze.com/search/shows?q=${results}`);
+                console.log(res.data);
+            } catch (err) {
+                console.log(err);
+            }
+        } else {
+            console.log("CONNECTION TIMEOUT: PLEASE TRY AGAIN LATER...");
+        }
+    }, delay)
 }
