@@ -29,9 +29,10 @@ const displayResults = (results) => {
         const showContainer = document.createElement("div");
         addImgAndName(result, showContainer);        
         addShowChannel(result, showContainer);
+        addShowRuntime(result, showContainer)
 
         resultsContainer.appendChild(showContainer);
-        console.log(result.show.premiered)
+        console.log(result.show)
     }
 }
 
@@ -57,6 +58,12 @@ const addShowChannel = (result, showContainer) => {
         showChannel.innerText = `${result.show.webChannel.name}, `;
         showContainer.appendChild(showChannel);
     }
+}
+
+const addShowRuntime = (result, showContainer) => {
+    const showRuntime = document.createElement("span");
+    showRuntime.innerText = result.show.premiered.slice(0, 4);
+    showContainer.appendChild(showRuntime);
 }
 
 const clearResults = (results) => {
