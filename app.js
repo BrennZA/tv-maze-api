@@ -27,9 +27,11 @@ const displayResults = (results) => {
     clearResults(resultsContainer.children);
     for(let result of results) {
         const showContainer = document.createElement("div");
-        addImgAndName(result, showContainer)
-        
+        addImgAndName(result, showContainer);        
+        addShowChannel(result, showContainer);
+
         resultsContainer.appendChild(showContainer);
+        console.log(result.show.premiered)
     }
 }
 
@@ -43,6 +45,18 @@ const addImgAndName = (result, showContainer) => {
     const showName = document.createElement("h2");
     showName.innerText = result.show.name;
     showContainer.appendChild(showName);
+}
+
+const addShowChannel = (result, showContainer) => {
+    if(result.show.network) {
+        const showChannel = document.createElement("a");
+        showChannel.innerText = result.show.network.name;
+        showContainer.appendChild(showChannel);
+    } else if(result.show.webChannel.name) {
+        showChannel = document.createElement("a");
+        showChannel.innerText = `${result.show.webChannel.name}, `;
+        showContainer.appendChild(showChannel);
+    }
 }
 
 const clearResults = (results) => {
