@@ -26,14 +26,23 @@ const generateResults = () => {
 const displayResults = (results) => {
     clearResults(resultsContainer.children);
     for(let result of results) {
-        const showName = document.createElement("h2");
-        showName.innerText = result.show.name;
-
         const showContainer = document.createElement("div");
-        showContainer.appendChild(showName);
-
+        addImgAndName(result, showContainer)
+        
         resultsContainer.appendChild(showContainer);
     }
+}
+
+const addImgAndName = (result, showContainer) => {
+    if(result.show.image) {
+        const showImage = document.createElement("img");
+        showImage.src = result.show.image.medium;
+        showContainer.appendChild(showImage);
+    }
+    
+    const showName = document.createElement("h2");
+    showName.innerText = result.show.name;
+    showContainer.appendChild(showName);
 }
 
 const clearResults = (results) => {
