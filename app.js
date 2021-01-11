@@ -51,7 +51,7 @@ const addImgAndName = (result, showContainer) => {
 const addShowChannel = (result, showContainer) => {
     if(result.show.network) {
         const showChannel = document.createElement("a");
-        showChannel.innerText = result.show.network.name;
+        showChannel.innerText = `${result.show.network.name}, `;
         showContainer.appendChild(showChannel);
     } else if(result.show.webChannel.name) {
         showChannel = document.createElement("a");
