@@ -27,9 +27,8 @@ const displayResults = (results) => {
     clearResults(resultsContainer.children);
     for(let result of results) {
         const showContainer = document.createElement("div");
-        addImgAndName(result, showContainer);        
-        addShowChannel(result, showContainer);
-        addShowRuntime(result, showContainer)
+        addImgAndName(result, showContainer);  
+        addSourceInfo(result, showContainer);      
 
         resultsContainer.appendChild(showContainer);
         console.log(result.show)
@@ -48,22 +47,27 @@ const addImgAndName = (result, showContainer) => {
     showContainer.appendChild(showName);
 }
 
-const addShowChannel = (result, showContainer) => {
+const addSourceInfo = (result, showContainer) => {
+    const sourceContainer = document.createElement("span");
+    addShowChannel(result, sourceContainer);
+    addShowRuntime(result, showContainer, sourceContainer);
+}
+
+const addShowChannel = (result, sourceContainer) => {
     if(result.show.network) {
         const showChannel = document.createElement("a");
         showChannel.innerText = `${result.show.network.name}, `;
-        showContainer.appendChild(showChannel);
+        sourceContainer.appendChild(showChannel);
     } else if(result.show.webChannel.name) {
         showChannel = document.createElement("a");
         showChannel.innerText = `${result.show.webChannel.name}, `;
-        showContainer.appendChild(showChannel);
+        sourceContainer.appendChild(showChannel);
     }
 }
 
-const addShowRuntime = (result, showContainer) => {
-    const showRuntime = document.createElement("span");
-    showRuntime.innerText = result.show.premiered.slice(0, 4);
-    showContainer.appendChild(showRuntime);
+const addShowRuntime = (result, showContainer, sourceContainer) => {
+    sourceContainer.innerText += result.show.premiered.slice(0, 4);
+    showContainer.appendChild(sourceContainer);
 }
 
 const clearResults = (results) => {
