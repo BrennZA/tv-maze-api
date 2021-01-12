@@ -66,8 +66,10 @@ const addShowChannel = (result, sourceContainer) => {
 }
 
 const addShowRuntime = (result, showContainer, sourceContainer) => {
-    sourceContainer.innerText += result.show.premiered.slice(0, 4);
-    showContainer.appendChild(sourceContainer);
+    if(result.show.premiered) {
+        sourceContainer.innerText += result.show.premiered.slice(0, 4);
+        showContainer.appendChild(sourceContainer);
+    }
 }
 
 const clearResults = (results) => {
