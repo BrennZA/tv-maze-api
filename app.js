@@ -29,7 +29,7 @@ const displayResults = (results) => {
         const showContainer = document.createElement("div");
         addImgAndName(result, showContainer);  
         addSourceInfo(result, showContainer);   
-        addShowGenre(result, showContainer);   
+        addShowDescription(result, showContainer);   
 
         resultsContainer.appendChild(showContainer);
         // console.log(result.show)
@@ -81,11 +81,19 @@ const addShowRuntime = async (result, showContainer, sourceContainer) => {
     }
 }
 
-const addShowGenre = (result, showContainer) => {
+const addShowDescription = (result, showContainer) => {
+    const descriptionContainer = document.createElement("div");
+    addShowGenre(result, showContainer, descriptionContainer);
+}
+
+// replace last commit with description container changes!
+
+const addShowGenre = (result, showContainer, descriptionContainer) => {
     if(result.show.genres) {
-        const showGenre = document.createElement("div");
+        const showGenre = document.createElement("span");
         showGenre.innerText = result.show.genres;
-        showContainer.appendChild(showGenre);
+        descriptionContainer.appendChild(showGenre);
+        showContainer.appendChild(descriptionContainer);
     }
 }
 
