@@ -32,7 +32,7 @@ const displayResults = (results) => {
         addShowDescription(result, showContainer);   
 
         resultsContainer.appendChild(showContainer);
-        // console.log(result.show)
+        console.log(result.show)
     }
 }
 
@@ -84,15 +84,23 @@ const addShowRuntime = async (result, showContainer, sourceContainer) => {
 const addShowDescription = (result, showContainer) => {
     const descriptionContainer = document.createElement("div");
     addShowGenre(result, showContainer, descriptionContainer);
+    addShowRating(result, showContainer, descriptionContainer);
 }
-
-// replace last commit with description container changes!
 
 const addShowGenre = (result, showContainer, descriptionContainer) => {
     if(result.show.genres) {
         const showGenre = document.createElement("span");
         showGenre.innerText = result.show.genres;
         descriptionContainer.appendChild(showGenre);
+        showContainer.appendChild(descriptionContainer);
+    }
+}
+
+const addShowRating = (result, showContainer, descriptionContainer) => {
+    if(result.show.rating.average) {
+        const showRating = document.createElement("span");
+        showRating.innerHTML = `<i class='fas fa-star'></i> ${result.show.rating.average}`;
+        descriptionContainer.appendChild(showRating);
         showContainer.appendChild(descriptionContainer);
     }
 }
