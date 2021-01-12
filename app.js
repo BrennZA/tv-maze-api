@@ -65,10 +65,18 @@ const addShowChannel = (result, sourceContainer) => {
     }
 }
 
-const addShowRuntime = (result, showContainer, sourceContainer) => {
+const addShowRuntime = async (result, showContainer, sourceContainer) => {
     if(result.show.premiered) {
         sourceContainer.innerText += result.show.premiered.slice(0, 4);
         showContainer.appendChild(sourceContainer);
+    }
+    
+    if(result.show.status.toLowerCase() === "running") {
+        sourceContainer.innerText += " - Now";
+    } else if(result.show.status.toLowerCase() === "ended") {
+        const res = await axios.get(result.show._links.previousepisode.href);
+        const lastEpisode = res.data.airdate;
+        sourceContainer.innerText += ` - ${lastEpisode.slice(0, 4)}`;
     }
 }
 
