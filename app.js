@@ -32,7 +32,6 @@ const displayResults = (results) => {
         addShowDescription(result, showContainer);   
 
         resultsContainer.appendChild(showContainer);
-        console.log(result.show)
     }
 }
 
@@ -85,6 +84,7 @@ const addShowDescription = (result, showContainer) => {
     const descriptionContainer = document.createElement("div");
     addShowGenre(result, showContainer, descriptionContainer);
     addShowRating(result, showContainer, descriptionContainer);
+    addShowSummary(result, showContainer, descriptionContainer);
 }
 
 const addShowGenre = (result, showContainer, descriptionContainer) => {
@@ -103,6 +103,13 @@ const addShowRating = (result, showContainer, descriptionContainer) => {
         descriptionContainer.appendChild(showRating);
         showContainer.appendChild(descriptionContainer);
     }
+}
+
+const addShowSummary = (result, showContainer, descriptionContainer) => {
+    const showSummary = document.createElement("p");
+    showSummary.innerHTML = result.show.summary;
+    descriptionContainer.appendChild(showSummary);
+    showContainer.appendChild(descriptionContainer);
 }
 
 const clearResults = (results) => {
