@@ -28,10 +28,11 @@ const displayResults = (results) => {
     for(let result of results) {
         const showContainer = document.createElement("div");
         addImgAndName(result, showContainer);  
-        addSourceInfo(result, showContainer);      
+        addSourceInfo(result, showContainer);   
+        addShowGenre(result, showContainer);   
 
         resultsContainer.appendChild(showContainer);
-        console.log(result.show)
+        // console.log(result.show)
     }
 }
 
@@ -77,6 +78,14 @@ const addShowRuntime = async (result, showContainer, sourceContainer) => {
         const res = await axios.get(result.show._links.previousepisode.href);
         const lastEpisode = res.data.airdate;
         sourceContainer.innerText += ` - ${lastEpisode.slice(0, 4)}`;
+    }
+}
+
+const addShowGenre = (result, showContainer) => {
+    if(result.show.genres) {
+        const showGenre = document.createElement("div");
+        showGenre.innerText = result.show.genres;
+        showContainer.appendChild(showGenre);
     }
 }
 
