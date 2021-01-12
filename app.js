@@ -56,11 +56,11 @@ const addSourceInfo = (result, showContainer) => {
 const addShowChannel = (result, sourceContainer) => {
     if(result.show.network) {
         const showChannel = document.createElement("a");
-        showChannel.innerText = `${result.show.network.name}, `;
+        showChannel.innerText = `${result.show.network.name} | `;
         sourceContainer.appendChild(showChannel);
     } else if(result.show.webChannel.name) {
         showChannel = document.createElement("a");
-        showChannel.innerText = `${result.show.webChannel.name}, `;
+        showChannel.innerText = `${result.show.webChannel.name} | `;
         sourceContainer.appendChild(showChannel);
     }
 }
@@ -70,7 +70,7 @@ const addShowRuntime = async (result, showContainer, sourceContainer) => {
         sourceContainer.innerText += result.show.premiered.slice(0, 4);
         showContainer.appendChild(sourceContainer);
     }
-    
+
     if(result.show.status.toLowerCase() === "running") {
         sourceContainer.innerText += " - Now";
     } else if(result.show.status.toLowerCase() === "ended") {
