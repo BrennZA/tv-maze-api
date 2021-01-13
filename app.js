@@ -28,14 +28,11 @@ const displayResults = (results) => {
     for (let result of results) {
         const showContainer = document.createElement("div");
         addImgAndName(result, showContainer);
-        addSourceInfo(result, showContainer);
-        addShowDescription(result, showContainer);
 
         resultsContainer.appendChild(showContainer);
     }
 }
 
-// Moved name into image if statement
 const addImgAndName = (result, showContainer) => {
     if (result.show.image) {
         const showImage = document.createElement("img");
@@ -45,6 +42,9 @@ const addImgAndName = (result, showContainer) => {
         const showName = document.createElement("h2");
         showName.innerText = result.show.name;
         showContainer.appendChild(showName);
+
+        addSourceInfo(result, showContainer);
+        addShowDescription(result, showContainer);
     }
 }
 
