@@ -26,93 +26,92 @@ const generateResults = () => {
 const displayResults = (results) => {
     clearResults(resultsContainer.children);
     for (let result of results) {
+        const show = result.show;
         const showContainer = document.createElement("div");
-        addImgAndName(result, showContainer);
+        addImgAndName(show, showContainer);
 
         resultsContainer.appendChild(showContainer);
-
-        console.log(result.show)
     }
 }
 
-const addImgAndName = (result, showContainer) => {
-    if (result.show.image) {
+const addImgAndName = (show, showContainer) => {
+    if (show.image) {
         const showImage = document.createElement("img");
-        showImage.src = result.show.image.medium;
+        showImage.src = show.image.medium;
         showContainer.appendChild(showImage);
 
         const showName = document.createElement("h2");
-        showName.innerText = result.show.name;
+        showName.innerText = show.name;
         showContainer.appendChild(showName);
 
-        addSourceInfo(result, showContainer);
-        addShowDescription(result, showContainer);
+        addSourceInfo(show, showContainer);
+        addShowDescription(show, showContainer);
     }
 }
 
-const addSourceInfo = (result, showContainer) => {
+const addSourceInfo = (show, showContainer) => {
     const sourceContainer = document.createElement("span");
-    addShowChannel(result, sourceContainer);
-    addShowRuntime(result, showContainer, sourceContainer);
+    addShowChannel(show, sourceContainer);
+    addShowRuntime(show, showContainer, sourceContainer);
 }
 
-const addShowChannel = (result, sourceContainer) => {
-    if (result.show.network) {
+const addShowChannel = (show, sourceContainer) => {
+    if (show.network) {
         const showChannel = document.createElement("a");
-        showChannel.innerText = `${result.show.network.name} | `;
+        showChannel.innerText = `${show.network.name} | `;
         sourceContainer.appendChild(showChannel);
-    } else if (result.show.webChannel.name) {
+    } else if (show.webChannel.name) {
         showChannel = document.createElement("a");
-        showChannel.innerText = `${result.show.webChannel.name} | `;
+        showChannel.innerText = `${show.webChannel.name} | `;
         sourceContainer.appendChild(showChannel);
     }
 }
 
-const addShowRuntime = async (result, showContainer, sourceContainer) => {
-    if (result.show.premiered) {
-        sourceContainer.innerText += result.show.premiered.slice(0, 4);
+const addShowRuntime = async (show, showContainer, sourceContainer) => {
+    if (show.premiered) {
+        sourceContainer.innerText += show.premiered.slice(0, 4);
         showContainer.appendChild(sourceContainer);
     }
 
-    if (result.show.status.toLowerCase() === "running") {
+    if (show.status.toLowerCase() === "running") {
         sourceContainer.innerText += " - Now";
-    } else if (result.show.status.toLowerCase() === "ended") {
-        if(result.show._links.previousepisode) {
-            const res = await axios.get(result.show._links.previousepisode.href);
+    } else if (show.status.toLowerCase() === "ended") {
+        if(show._links.previousepisode) {
+            const res = await axios.get(show._links.previousepisode.href);
             const lastEpisode = res.data.airdate;
             sourceContainer.innerText += ` - ${lastEpisode.slice(0, 4)}`;
         }
     }
 }
 
-const addShowDescription = (result, showContainer) => {
+const addShowDescription = (show, showContainer) => {
     const descriptionContainer = document.createElement("div");
-    addShowGenre(result, showContainer, descriptionContainer);
-    addShowRating(result, showContainer, descriptionContainer);
-    addShowSummary(result, showContainer, descriptionContainer);
+    addShowGenre(show, showContainer, descriptionContainer);
+    addShowRating(show, showContainer, descriptionContainer);
+    addShowSummary(show, showContainer, descriptionContainer);
 }
 
-const addShowGenre = (result, showContainer, descriptionContainer) => {
-    if (result.show.genres) {
+const addShowGenre = (show, showContainer, descriptionContainer) => {
+    if (show.genres) {
         const showGenre = document.createElement("span");
-        showGenre.innerText = result.show.genres;
+        showGenre.innerText = show.genres;
         descriptionContainer.appendChild(showGenre);
         showContainer.appendChild(descriptionContainer);
     }
 }
 
-const addShowRating = (result, showContainer, descriptionContainer) => {
-    if (result.show.rating.average) {
+const addShowRating = (show, showContainer, descriptionContainer) => {
+    if (show.rating.average) {
         const showRating = document.createElement("span");
-        showRating.innerHTML = `<i class='fas fa-star'></i> ${result.show.rating.average}`;
+        showRating.innerHTML = `<i class='fas fa-star'></i> ${show.rating.average}`;
         descriptionContainer.appendChild(showRating);
         showContainer.appendChild(descriptionContainer);
     }
 }
 
-const addShowSummary = (result, showContainer, descriptionContainer) => {
+const addShowSummary = (show, showContainer, descriptionContainer) => {
     const showSummary = document.createElement("p");
-    showSummary.innerHTML = result.show.summary;
+    showSummary.innerHTML = show.summary;
     descriptionContainer.appendChild(showSummary);
     showContainer.appendChild(descriptionContainer);
 }
