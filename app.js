@@ -30,6 +30,8 @@ const displayResults = (results) => {
         addImgAndName(result, showContainer);
 
         resultsContainer.appendChild(showContainer);
+
+        console.log(result.show)
     }
 }
 
@@ -75,9 +77,11 @@ const addShowRuntime = async (result, showContainer, sourceContainer) => {
     if (result.show.status.toLowerCase() === "running") {
         sourceContainer.innerText += " - Now";
     } else if (result.show.status.toLowerCase() === "ended") {
-        const res = await axios.get(result.show._links.previousepisode.href);
-        const lastEpisode = res.data.airdate;
-        sourceContainer.innerText += ` - ${lastEpisode.slice(0, 4)}`;
+        if(result.show._links.previousepisode) {
+            const res = await axios.get(result.show._links.previousepisode.href);
+            const lastEpisode = res.data.airdate;
+            sourceContainer.innerText += ` - ${lastEpisode.slice(0, 4)}`;
+        }
     }
 }
 
