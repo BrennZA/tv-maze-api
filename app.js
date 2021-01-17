@@ -40,19 +40,31 @@ const addImgAndName = (show, showContainer) => {
         showImage.src = show.image.medium;
         showContainer.appendChild(showImage);
 
+        // NEW SHOW DETAILS DIV
+        const showDetails = document.createElement("div"); 
         const showName = document.createElement("h2");
         showName.innerText = show.name;
-        showContainer.appendChild(showName);
+        // MOVE SHOW NAME INTO SHOW DETAILS
+        showDetails.appendChild(showName);
 
-        addSourceInfo(show, showContainer);
-        addShowDescription(show, showContainer);
+        // CHANGED SHOW CONTAINER PARAM TO SHOW DETAILS
+        addSourceInfo(show, showDetails);
+        // CHANGED SHOW CONTAINER PARAM TO SHOW DETAILS
+        addShowDescription(show, showDetails);
+
+        // CREATED SHOW CONTAINER APPEND SHOW DETAILS
+        showContainer.appendChild(showDetails);
     }
 }
 
-const addSourceInfo = (show, showContainer) => {
+// CHANGED SHOW CONTAINER PARAM BELOW TO SHOW DETAILS
+const addSourceInfo = (show, showDetails) => {
     const sourceContainer = document.createElement("span");
     addShowChannel(show, sourceContainer);
-    addShowRuntime(show, showContainer, sourceContainer);
+    // CHANGED SHOW CONTAINER PARAM BELOW TO SHOW DETAILS
+    addShowRuntime(show, showDetails, sourceContainer);
+    // CHANGED SHOW CONTAINER APPEND TO SHOW DETAILS
+    showDetails.appendChild(sourceContainer);
 }
 
 const addShowChannel = (show, sourceContainer) => {
@@ -67,10 +79,11 @@ const addShowChannel = (show, sourceContainer) => {
     }
 }
 
-const addShowRuntime = async (show, showContainer, sourceContainer) => {
+// CHANGED SHOW CONTAINER PARAM BELOW TO SHOW DETAILS
+const addShowRuntime = async (show, showDetails, sourceContainer) => {
     if (show.premiered) {
         sourceContainer.innerText += show.premiered.slice(0, 4);
-        showContainer.appendChild(sourceContainer);
+        // MOVED SOURCE CONTAINER APPEND INTO SHOW CONTAINER BELOW
     }
 
     if (show.status.toLowerCase() === "running") {
@@ -82,38 +95,47 @@ const addShowRuntime = async (show, showContainer, sourceContainer) => {
             sourceContainer.innerText += ` - ${lastEpisode.slice(0, 4)}`;
         }
     }
+    // MOVED APPEND SOURCE CONTAINER TO SHOW DETAILS IN ADD SOURE INFO FUNCTION
 }
 
-const addShowDescription = (show, showContainer) => {
+// CHANGED SHOW CONTAINER PARAM BELOW TO SHOW DETAILS
+const addShowDescription = (show, showDetails) => {
     const descriptionContainer = document.createElement("div");
-    addShowGenre(show, showContainer, descriptionContainer);
-    addShowRating(show, showContainer, descriptionContainer);
-    addShowSummary(show, showContainer, descriptionContainer);
+    // REMOVED SHOW CONTAINER PARAM BELOW
+    addShowGenre(show, descriptionContainer);
+    // REMOVED SHOW CONTAINER PARAM BELOW
+    addShowRating(show, descriptionContainer);
+    // CHANGED SHOW CONTAINER PARAM BELOW TO SHOW DETAILS
+    addShowSummary(show, showDetails, descriptionContainer);
 }
 
-const addShowGenre = (show, showContainer, descriptionContainer) => {
+// REMOVED SHOW CONTAINER PARAM BELOW
+const addShowGenre = (show, descriptionContainer) => {
     if (show.genres) {
         const showGenre = document.createElement("span");
         showGenre.innerText = show.genres;
         descriptionContainer.appendChild(showGenre);
-        showContainer.appendChild(descriptionContainer);
+        // REMOVED SHOW CONTAINER APPEND BELOW         
     }
 }
 
-const addShowRating = (show, showContainer, descriptionContainer) => {
+// REMOVED SHOW CONTAINER PARAM BELOW
+const addShowRating = (show, descriptionContainer) => {
     if (show.rating.average) {
         const showRating = document.createElement("span");
         showRating.innerHTML = `<i class='fas fa-star'></i> ${show.rating.average}`;
         descriptionContainer.appendChild(showRating);
-        showContainer.appendChild(descriptionContainer);
+        // REMOVED SHOW CONTAINER APPEND TO BELOW
     }
 }
 
-const addShowSummary = (show, showContainer, descriptionContainer) => {
+// CHANGED SHOW CONTAINER PARAM TO SHOW DETAILS PARAM
+const addShowSummary = (show, showDetails, descriptionContainer) => {
     const showSummary = document.createElement("p");
     showSummary.innerHTML = show.summary;
     descriptionContainer.appendChild(showSummary);
-    showContainer.appendChild(descriptionContainer);
+    // CHANGED SHOW CONTAINER APPEND TO SHOW DETAILS APPEND
+    showDetails.appendChild(descriptionContainer);
 }
 
 const clearResults = (results) => {
