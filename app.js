@@ -129,6 +129,7 @@ const addShowRating = (show, descriptionContainer) => {
         const showRating = document.createElement("span");
         showRating.innerHTML = `<i class='fas fa-star'></i> ${show.rating.average}`;
         descriptionContainer.appendChild(showRating);
+        showRating.classList.add("float--right");
         // REMOVED SHOW CONTAINER APPEND TO BELOW
     }
 }
