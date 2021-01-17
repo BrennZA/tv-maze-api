@@ -30,6 +30,7 @@ const displayResults = (results) => {
         const showContainer = document.createElement("div");
         addImgAndName(show, showContainer);
 
+        showContainer.classList.add("display--flex");
         resultsContainer.appendChild(showContainer);
     }
 }
