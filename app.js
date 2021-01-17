@@ -53,6 +53,8 @@ const addImgAndName = (show, showContainer) => {
         // CHANGED SHOW CONTAINER PARAM TO SHOW DETAILS
         addShowDescription(show, showDetails);
 
+        showDetails.classList.add("width--medium");
+
         // CREATED SHOW CONTAINER APPEND SHOW DETAILS
         showContainer.appendChild(showDetails);
     }
