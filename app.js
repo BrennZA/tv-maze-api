@@ -137,7 +137,8 @@ const addShowRating = (show, descriptionContainer) => {
 // CHANGED SHOW CONTAINER PARAM TO SHOW DETAILS PARAM
 const addShowSummary = (show, showDetails, descriptionContainer) => {
     const showSummary = document.createElement("p");
-    showSummary.innerHTML = show.summary;
+    showSummary.innerHTML = show.summary.substring(0, 500);
+    // showSummary.substring(0, 100);
     descriptionContainer.appendChild(showSummary);
     // CHANGED SHOW CONTAINER APPEND TO SHOW DETAILS APPEND
     showDetails.appendChild(descriptionContainer);
