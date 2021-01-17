@@ -54,6 +54,7 @@ const addImgAndName = (show, showContainer) => {
         addShowDescription(show, showDetails);
 
         showDetails.classList.add("width--medium");
+        showDetails.classList.add("padding-all--small");
 
         // CREATED SHOW CONTAINER APPEND SHOW DETAILS
         showContainer.appendChild(showDetails);
